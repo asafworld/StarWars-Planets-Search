@@ -8,12 +8,7 @@ function StarWarsProvider({ children }) {
   const [filterByName, setFilterByName] = useState({
     name: '',
   });
-  const [filterByNumericValues, setFilterByNumericValues] = useState([
-    {
-      column: '',
-      comparison: '',
-      value: '',
-    }]);
+  const [filterByNumericValues, setFilterByNumericValues] = useState([]);
 
   const state = {
     data,
@@ -44,3 +39,9 @@ StarWarsProvider.propTypes = {
 };
 
 export default StarWarsProvider;
+
+// {
+//   column: '',
+//   comparison: '',
+//   value: '',
+// }
