@@ -9,6 +9,7 @@ function StarWarsProvider({ children }) {
     name: '',
   });
   const [filterByNumericValues, setFilterByNumericValues] = useState([]);
+  const [filtered, setFiltered] = useState([]);
 
   const state = {
     data,
@@ -17,12 +18,15 @@ function StarWarsProvider({ children }) {
     setFilterByName,
     filterByNumericValues,
     setFilterByNumericValues,
+    filtered,
+    setFiltered,
   };
 
   useEffect(() => {
     const fetchData = async () => {
       const newData = await fetchPlanets();
       setData(newData.results);
+      setFiltered(newData.results);
     };
     fetchData();
   }, []);

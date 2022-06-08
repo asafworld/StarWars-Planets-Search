@@ -1,18 +1,34 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import StarWarsContext from '../context/StarWarsContext';
 
 function Table() {
-  const [planetsArr, setPlanetsArr] = useState([]);
-  const { data, filterByName, filterByNumericValues } = useContext(StarWarsContext);
+  const { data,
+    filterByName,
+    filterByNumericValues,
+    filtered,
+    setFiltered } = useContext(StarWarsContext);
+
+  const filterByNumber = () => {
+    const newFilByName = (
+      data.filter((plan) => plan.name.toLowerCase().includes(filterByName.name))
+    );
+    const newFiltered = filterByNumericValues.reduce((acc, curr) => acc
+      .filter((plan) => {
+        switch (curr.comparison) {
+        case 'maior que':
+          return Number(plan[curr.column]) > Number(curr.value);
+        case 'menor que':
+          return Number(plan[curr.column]) < Number(curr.value);
+        case 'igual a':
+          return Number(plan[curr.column]) === Number(curr.value);
+        default: return data;
+        }
+      }), newFilByName);
+    setFiltered(newFiltered);
+  };
 
   useEffect(() => {
-    if (filterByName.name === '' && filterByNumericValues.length === 0) {
-      setPlanetsArr(data);
-    } else {
-      setPlanetsArr(
-        data.filter((plan) => plan.name.toLowerCase().includes(filterByName.name)),
-      );
-    }
+    filterByNumber();
   }, [data, filterByName, filterByNumericValues]);
 
   return (
@@ -36,7 +52,7 @@ function Table() {
       </thead>
       <tbody>
         {
-          planetsArr.map((planet) => (
+          filtered.map((planet) => (
             <tr key={ planet.name }>
               <td>{ planet.name }</td>
               <td>{ planet.rotation_period }</td>
@@ -60,11 +76,3 @@ function Table() {
 }
 
 export default Table;
-
-// const columnArr = [
-//   'population',
-//   'orbital_period',
-//   'diameter',
-//   'rotation_period',
-//   'surface_water',
-// ];
