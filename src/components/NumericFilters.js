@@ -129,11 +129,31 @@ function NumericFilters() {
 
       { filterByNumericValues.map((obj) => (
         <ul key={ obj.name }>
-          <li>{obj.column}</li>
-          <li>{obj.comparison}</li>
-          <li>{obj.value}</li>
+          <li data-testid="filter">
+            <p>{obj.column}</p>
+            <p>{obj.comparison}</p>
+            <p>{obj.value}</p>
+            <button
+              type="button"
+              onClick={ () => {
+                const newFilter = (
+                  filterByNumericValues.filter((filt) => filt.column !== obj.column)
+                );
+                setFilterByNumericValues(newFilter);
+              } }
+            >
+              Remover
+            </button>
+          </li>
         </ul>
       )) }
+      <button
+        type="button"
+        data-testid="button-remove-filters"
+        onClick={ () => setFilterByNumericValues([]) }
+      >
+        Remover todas filtragens
+      </button>
     </div>
   );
 }
