@@ -10,23 +10,32 @@ function StarWarsProvider({ children }) {
   });
   const [filterByNumericValues, setFilterByNumericValues] = useState([]);
   const [filtered, setFiltered] = useState([]);
+  const [order, setOrder] = useState({
+    column: 'population',
+    sort: 'ASC',
+  });
 
   const state = {
     data,
     setData,
+    order,
+    setOrder,
+    filtered,
+    setFiltered,
     filterByName,
     setFilterByName,
     filterByNumericValues,
     setFilterByNumericValues,
-    filtered,
-    setFiltered,
   };
 
   useEffect(() => {
     const fetchData = async () => {
       const newData = await fetchPlanets();
       setData(newData.results);
-      setFiltered(newData.results);
+      setFiltered(newData.results.sort((a, b) => {
+        const minus = -1;
+        return a.name > b.name ? 1 : minus;
+      }));
     };
     fetchData();
   }, []);
