@@ -5,13 +5,16 @@ function InputName() {
   const { filterByName, setFilterByName } = useContext(StarWarsContext);
 
   return (
-    <input
-      type="text"
-      placeholder="Name"
-      data-testid="name-filter"
-      value={ filterByName.name }
-      onChange={ ({ target }) => setFilterByName({ name: target.value }) }
-    />
+    <section className="input-section">
+      <input
+        type="text"
+        className="form-control input-name"
+        placeholder="Name"
+        data-testid="name-filter"
+        value={ filterByName.name }
+        onChange={ ({ target }) => setFilterByName({ name: target.value }) }
+      />
+    </section>
   );
 }
 

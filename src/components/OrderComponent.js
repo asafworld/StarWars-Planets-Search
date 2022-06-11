@@ -57,11 +57,12 @@ function OrderComponent() {
   }
 
   return (
-    <section>
-      <label htmlFor="column-sort">
+    <section className="order-component">
+      <label htmlFor="column-sort" className="order-by-class">
         Order by:
         <select
           data-testid="column-sort"
+          className="form-select"
           id="column-sort"
           onChange={ (e) => onChangeDropdown(e) }
         >
@@ -70,30 +71,35 @@ function OrderComponent() {
           ))}
         </select>
       </label>
-      <label htmlFor="column-sort-input-asc">
-        Ascending:
-        <input
-          type="radio"
-          name="order"
-          value="ASC"
-          data-testid="column-sort-input-asc"
-          id="column-sort-input-asc"
-          onChange={ (event) => onChangeRadio(event) }
-        />
-      </label>
-      <label htmlFor="column-sort-input-desc">
-        Descending:
-        <input
-          type="radio"
-          name="order"
-          value="DESC"
-          data-testid="column-sort-input-desc"
-          id="column-sort-input-desc"
-          onChange={ (event) => onChangeRadio(event) }
-        />
-      </label>
+      <div className="order-type-div">
+        <label htmlFor="column-sort-input-asc" className="form-check-label">
+          Ascending:
+          <input
+            type="radio"
+            className="form-check-input"
+            name="order"
+            value="ASC"
+            data-testid="column-sort-input-asc"
+            id="column-sort-input-asc"
+            onChange={ (event) => onChangeRadio(event) }
+          />
+        </label>
+        <label htmlFor="column-sort-input-desc" className="form-check-label">
+          Descending:
+          <input
+            type="radio"
+            className="form-check-input"
+            name="order"
+            value="DESC"
+            data-testid="column-sort-input-desc"
+            id="column-sort-input-desc"
+            onChange={ (event) => onChangeRadio(event) }
+          />
+        </label>
+      </div>
       <button
         type="button"
+        className="btn btn-dark"
         data-testid="column-sort-button"
         onClick={ () => orderFunction() }
       >

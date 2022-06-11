@@ -31,22 +31,6 @@ function NumericFilters() {
     setColumn(filterByNumericValues.map((filt) => filt.column));
   }, [filterByNumericValues]);
 
-  const columnFunc = () => {
-    if (filterByNumericValues.length === 0) {
-      return columnArr.map((opt) => (
-        <option key={ opt } value={ opt }>{ opt }</option>
-      ));
-    }
-    let test = columnArr;
-    filterByNumericValues.forEach((filt) => {
-      test = test.filter((opt) => opt !== filt.column);
-    });
-
-    return test.map((col) => (
-      <option key={ col } value={ col }>{ col }</option>
-    ));
-  };
-
   const onChangeFunc = ({ target }) => {
     setfilterInfo({
       ...filterInfo,
@@ -76,23 +60,27 @@ function NumericFilters() {
   };
 
   return (
-    <div>
-      <label htmlFor="column-filter">
+    <div className="numeric-filters">
+      <label htmlFor="column-filter" className="select-label">
         Column
         <select
           data-testid="column-filter"
+          className="form-select"
           id="column-filter"
           name="column"
           value={ filterInfo.column }
           onChange={ (event) => onChangeFunc(event) }
         >
-          { columnFunc() }
+          { columnEntries.map((col) => (
+            <option key={ col } value={ col }>{ col }</option>
+          )) }
         </select>
       </label>
-      <label htmlFor="comparison-filter">
+      <label htmlFor="comparison-filter" className="select-label">
         Operation
         <select
           data-testid="comparison-filter"
+          className="form-select"
           id="comparison-filter"
           name="comparison"
           value={ filterInfo.comparison }
@@ -107,6 +95,7 @@ function NumericFilters() {
         <input
           type="number"
           data-testid="value-filter"
+          className="form-control"
           id="value-filter"
           name="value"
           value={ filterInfo.value }
@@ -116,6 +105,7 @@ function NumericFilters() {
       <button
         type="button"
         data-testid="button-filter"
+        className="btn btn-dark"
         onClick={ () => {
           setFilterByNumericValues([
             ...filterByNumericValues,
@@ -135,6 +125,7 @@ function NumericFilters() {
             <p>{obj.value}</p>
             <button
               type="button"
+              className="btn btn-dark"
               onClick={ () => {
                 const newFilter = (
                   filterByNumericValues.filter((filt) => filt.column !== obj.column)
@@ -150,6 +141,7 @@ function NumericFilters() {
       <button
         type="button"
         data-testid="button-remove-filters"
+        className="btn btn-dark"
         onClick={ () => setFilterByNumericValues([]) }
       >
         Remover todas filtragens
