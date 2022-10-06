@@ -90,6 +90,11 @@ body button:hover {
   box-shadow: yellow 0px 0px 10px;
 }
 
+.filters {
+  display: flex;
+  flex-direction: column;
+}
+
 .input-section {
   margin: 20px;
 }
@@ -138,7 +143,7 @@ body button:hover {
 .order-component {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   margin: 20px;
 }
 
@@ -155,15 +160,13 @@ body button:hover {
 .order-component button {
   width: 150px;
   height: 80px;
-  margin-left: 15px;
-  margin-right: 15px;
 }
 
 .order-type-div {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin: 20px;
+  margin: 5px 0 5px; 
 }
 
 .order-by-class {
@@ -179,7 +182,7 @@ body button:hover {
 
 table {
   background-color: lightgray;
-  opacity: 55%;
+  opacity: 70%;
   border-radius: 50px;
 }
 
